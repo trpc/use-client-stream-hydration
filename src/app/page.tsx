@@ -17,9 +17,9 @@ function useWaitQuery(props: { wait: number }) {
     queryKey: ["wait", props.wait],
     queryFn: async () => {
       const path = `/api/wait?wait=${props.wait}`;
-      console.log("fetching", path);
-
       const url = baseUrl + path;
+
+      console.log("fetching", url);
       const res: string = await (
         await fetch(url, {
           cache: "no-store",
