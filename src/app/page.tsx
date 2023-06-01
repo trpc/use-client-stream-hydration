@@ -63,15 +63,6 @@ export default function MyPage() {
       <Suspense fallback={<div>waiting 700....</div>}>
         <MyComponent wait={700} />
       </Suspense>
-      <Suspense fallback={<div>waiting 800....</div>}>
-        <MyComponent wait={800} />
-      </Suspense>
-      <Suspense fallback={<div>waiting 900....</div>}>
-        <MyComponent wait={900} />
-      </Suspense>
-      <Suspense fallback={<div>waiting 1000....</div>}>
-        <MyComponent wait={1000} />
-      </Suspense>
 
       <fieldset>
         <legend>
@@ -80,16 +71,15 @@ export default function MyPage() {
         <Suspense
           fallback={
             <>
-              <div>waiting 2000....</div>
-              <div>waiting 3000....</div>
-              <div>waiting 4000....</div>
+              <div>waiting 800....</div>
+              <div>waiting 900....</div>
+              <div>waiting 1000....</div>
             </>
           }
         >
+          <MyComponent wait={800} />
+          <MyComponent wait={900} />
           <MyComponent wait={1000} />
-          <MyComponent wait={2000} />
-
-          <MyComponent wait={3000} />
         </Suspense>
       </fieldset>
     </>

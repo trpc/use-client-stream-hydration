@@ -1,5 +1,5 @@
 // app/providers.jsx
-'use client';
+"use client";
 
 import {
   ContextOptions,
@@ -7,9 +7,9 @@ import {
   dehydrate,
   hydrate,
   useQueryClient,
-} from '@tanstack/react-query';
-import React, { useRef } from 'react';
-import { createHydrationStreamProvider } from './HydrationStreamProvider';
+} from "@tanstack/react-query";
+import React, { useRef } from "react";
+import { createHydrationStreamProvider } from "./HydrationStreamProvider";
 
 const stream = createHydrationStreamProvider<DehydratedState>();
 
@@ -20,7 +20,7 @@ const stream = createHydrationStreamProvider<DehydratedState>();
  */
 export function ReactQueryStreamedHydration(props: {
   children: React.ReactNode;
-  context?: ContextOptions['context'];
+  context?: ContextOptions["context"];
 }) {
   const queryClient = useQueryClient({
     context: props.context,
@@ -30,17 +30,17 @@ export function ReactQueryStreamedHydration(props: {
 
   const cache = queryClient.getQueryCache();
 
-  if (typeof window === 'undefined' && !isSubscribed.current) {
+  if (typeof window === "undefined" && !isSubscribed.current) {
     // Do we need to care about unsubscribing? I don't think so to be honest
     cache.subscribe((event) => {
       switch (event.type) {
-        case 'added':
-        case 'updated':
+        case "added":
+        case "updated":
           console.log(
-            'tracking',
+            "tracking",
             event.query.queryHash,
-            'b/c of a',
-            event.type,
+            "b/c of a",
+            event.type
           );
           seenKeys.current.add(event.query.queryHash);
       }
@@ -55,7 +55,7 @@ export function ReactQueryStreamedHydration(props: {
           shouldDehydrateQuery(query) {
             const shouldDehydrate =
               seenKeys.current.has(query.queryHash) &&
-              query.state.status !== 'loading';
+              query.state.status !== "loading";
             return shouldDehydrate;
           },
         });
@@ -79,10 +79,10 @@ export function ReactQueryStreamedHydration(props: {
         }
 
         console.log(
-          'received',
+          "received",
           combinedEntries.queries.length,
-          'entries:',
-          combinedEntries.queries.map((q) => q.queryHash),
+          "entries:",
+          combinedEntries.queries.map((q) => q.queryHash).join(", ")
         );
 
         hydrate(queryClient, combinedEntries);
