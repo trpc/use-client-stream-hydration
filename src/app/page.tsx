@@ -2,12 +2,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 
+const baseUrl =
+  typeof window === "undefined"
+    ? process.env.VERCEL_URL ?? "http://localhost:3000"
+    : "";
 function useWaitQuery(props: { wait: number }) {
   const query = useQuery({
     queryKey: ["wait", props.wait],
     queryFn: async () => {
-      const url = `http://localhost:3000/api/wait?wait=${props.wait}`;
-      console.log("fetching", url);
+      const path = `/api/wait?wait=${props.wait}`;
+      console.log("fetching", path);
+
+      const url = baseUrl + path;
       const res: string = await (
         await fetch(url, {
           cache: "no-store",
