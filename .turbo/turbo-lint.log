@@ -1,0 +1,9 @@
+
+> @examples/next-app-dir@10.28.1 lint /Users/alex/dev/trpc/examples/.experimental/next-app-dir
+> next lint "--fix"
+
+- warn You have enabled experimental feature (serverActions) in next.config.js.
+- warn Experimental features are not covered by semver, and may cause unexpected or broken application behavior. Use at your own risk.
+
+- warn The Next.js plugin was not detected in your ESLint configuration. See https://nextjs.org/docs/basic-features/eslint#migrating-existing-config
+✔ No ESLint warnings or errors
