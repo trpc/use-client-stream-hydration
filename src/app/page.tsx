@@ -2,10 +2,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { Suspense } from "react";
 
-const baseUrl =
-  typeof window === "undefined"
-    ? process.env.VERCEL_URL ?? "http://localhost:3000"
-    : "";
+function getBaseURL() {
+  if (typeof window !== "undefined") {
+    return "";
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  return "http://localhost:3000";
+}
+const baseUrl = getBaseURL();
 function useWaitQuery(props: { wait: number }) {
   const query = useQuery({
     queryKey: ["wait", props.wait],
