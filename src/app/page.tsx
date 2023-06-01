@@ -1,6 +1,6 @@
 "use client";
-import { Suspense } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Suspense } from "react";
 
 function useWaitQuery(props: { wait: number }) {
   const query = useQuery({
