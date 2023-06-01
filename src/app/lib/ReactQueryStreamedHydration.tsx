@@ -9,7 +9,10 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import React, { useRef } from "react";
-import { createHydrationStreamProvider } from "./HydrationStreamProvider";
+import {
+  HydrationStreamProviderProps,
+  createHydrationStreamProvider,
+} from "./HydrationStreamProvider";
 
 const stream = createHydrationStreamProvider<DehydratedState>();
 
@@ -21,6 +24,7 @@ const stream = createHydrationStreamProvider<DehydratedState>();
 export function ReactQueryStreamedHydration(props: {
   children: React.ReactNode;
   context?: ContextOptions["context"];
+  transformer?: HydrationStreamProviderProps<DehydratedState>["transformer"];
 }) {
   const queryClient = useQueryClient({
     context: props.context,
@@ -87,6 +91,8 @@ export function ReactQueryStreamedHydration(props: {
 
         hydrate(queryClient, combinedEntries);
       }}
+      // Handle BigInts etc using superjson
+      transformer={props.transformer}
     >
       {props.children}
     </stream.Provider>
