@@ -8,7 +8,7 @@ import {
   hydrate,
   useQueryClient,
 } from "@tanstack/react-query";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   HydrationStreamProviderProps,
   createHydrationStreamProvider,
@@ -29,8 +29,17 @@ export function ReactQueryStreamedHydration(props: {
   const queryClient = useQueryClient({
     context: props.context,
   });
+
+  // <server only>
   const isSubscribed = useRef(false);
-  const seenKeys = useRef(new Set<string>());
+  /**
+   * We need to track which queries were added/updated during the render
+   */
+  const [trackedKeys] = useState(() => new Set<string>());
+  /**
+   * Track which queries were already passed to the client so we don't pass them again
+   */
+  const [passedKeys] = useState(() => new Set<string>());
 
   const cache = queryClient.getQueryCache();
 
@@ -46,10 +55,11 @@ export function ReactQueryStreamedHydration(props: {
             "b/c of a",
             event.type
           );
-          seenKeys.current.add(event.query.queryHash);
+          trackedKeys.add(event.query.queryHash);
       }
     });
   }
+  // </server only>
 
   return (
     <stream.Provider
@@ -58,12 +68,15 @@ export function ReactQueryStreamedHydration(props: {
         const dehydratedState = dehydrate(queryClient, {
           shouldDehydrateQuery(query) {
             const shouldDehydrate =
-              seenKeys.current.has(query.queryHash) &&
+              trackedKeys.has(query.queryHash) &&
+              !passedKeys.has(query.queryHash) &&
               query.state.status !== "loading";
+
+            passedKeys.add(query.queryHash);
             return shouldDehydrate;
           },
         });
-        seenKeys.current.clear();
+        trackedKeys.clear();
 
         if (!dehydratedState.queries.length) {
           return [];
