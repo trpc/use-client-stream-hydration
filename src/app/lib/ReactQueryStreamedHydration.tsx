@@ -65,6 +65,9 @@ export function ReactQueryStreamedHydration(props: {
     <stream.Provider
       // Happens on server:
       onFlush={() => {
+        /**
+         * Dehydrated state of the client where we only include the queries that were added/updated since the last flush
+         */
         const dehydratedState = dehydrate(queryClient, {
           shouldDehydrateQuery(query) {
             const shouldDehydrate =
@@ -86,23 +89,9 @@ export function ReactQueryStreamedHydration(props: {
       }}
       // Happens in browser:
       onEntries={(entries) => {
-        const combinedEntries: DehydratedState = {
-          queries: [],
-          mutations: [],
-        };
-        for (const entry of entries) {
-          combinedEntries.queries.push(...entry.queries);
-          combinedEntries.mutations.push(...entry.mutations);
+        for (const hydratedState of entries) {
+          hydrate(queryClient, hydratedState);
         }
-
-        console.log(
-          "received",
-          combinedEntries.queries.length,
-          "entries:",
-          combinedEntries.queries.map((q) => q.queryHash).join(", ")
-        );
-
-        hydrate(queryClient, combinedEntries);
       }}
       // Handle BigInts etc using superjson
       transformer={props.transformer}
