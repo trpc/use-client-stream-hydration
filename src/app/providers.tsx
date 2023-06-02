@@ -1,10 +1,10 @@
 // app/providers.jsx
-"use client";
+'use client';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import React from "react";
-import { ReactQueryStreamedHydration } from "./lib/ReactQueryStreamedHydration";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import React from 'react';
+import { ReactQueryStreamedHydration } from './lib/ReactQueryStreamedHydration';
 
 export function Providers(props: { children: React.ReactNode }) {
   const [queryClient] = React.useState(
@@ -19,7 +19,7 @@ export function Providers(props: { children: React.ReactNode }) {
         //     staleTime: Infinity,
         //   },
         // },
-      })
+      }),
   );
 
   return (

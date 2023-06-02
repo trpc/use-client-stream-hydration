@@ -1,3 +1,4 @@
+'use client';
 import { useServerInsertedHTML } from 'next/navigation';
 import {
   createContext,

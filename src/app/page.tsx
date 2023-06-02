@@ -1,30 +1,30 @@
-"use client";
-import { useQuery } from "@tanstack/react-query";
-import { Suspense } from "react";
+'use client';
+import { useQuery } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 // export const runtime = "edge"; // 'nodejs' (default) | 'edge'
 
 function getBaseURL() {
-  if (typeof window !== "undefined") {
-    return "";
+  if (typeof window !== 'undefined') {
+    return '';
   }
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  return "http://localhost:3000";
+  return 'http://localhost:3000';
 }
 const baseUrl = getBaseURL();
 function useWaitQuery(props: { wait: number }) {
   const query = useQuery({
-    queryKey: ["wait", props.wait],
+    queryKey: ['wait', props.wait],
     queryFn: async () => {
       const path = `/api/wait?wait=${props.wait}`;
       const url = baseUrl + path;
 
-      console.log("fetching", url);
+      console.log('fetching', url);
       const res: string = await (
         await fetch(url, {
-          cache: "no-store",
+          cache: 'no-store',
         })
       ).json();
       return res;
