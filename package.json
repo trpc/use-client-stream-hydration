@@ -11,12 +11,12 @@
     "test-start": "start-server-and-test start 3000 test:e2e"
   },
   "dependencies": {
-    "@tanstack/react-query": "^4.18.0",
-    "@tanstack/react-query-devtools": "^4.18.0",
-    "next": "^13.4.3",
+    "@tanstack/react-query": "^4.29.12",
+    "@tanstack/react-query-devtools": "^4.29.12",
+    "next": "^13.4.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "superjson": "^1.7.4"
+    "superjson": "^1.12.3"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
