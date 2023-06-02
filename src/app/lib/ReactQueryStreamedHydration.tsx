@@ -39,7 +39,7 @@ export function ReactQueryStreamedHydration(props: {
   /**
    * Track which queries were already passed to the client so we don't pass them again
    */
-  const [passedKeys] = useState(() => new Set<string>());
+  // const [passedKeys] = useState(() => new Set<string>());
 
   const cache = queryClient.getQueryCache();
 
@@ -69,10 +69,10 @@ export function ReactQueryStreamedHydration(props: {
           shouldDehydrateQuery(query) {
             const shouldDehydrate =
               trackedKeys.has(query.queryHash) &&
-              !passedKeys.has(query.queryHash) &&
+              // !passedKeys.has(query.queryHash) &&
               query.state.status !== "loading";
 
-            passedKeys.add(query.queryHash);
+            // passedKeys.add(query.queryHash);
             return shouldDehydrate;
           },
         });
