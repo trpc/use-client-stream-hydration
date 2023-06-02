@@ -12,4 +12,4 @@ Demo: https://use-client-stream-hydration.vercel.app/
 ### Known limitations
 
 - If the browser tree re-renders while the data is fetching, we'll initialize the request in the browser
-- This is not "true" SSR and requires JS - the server does stream data to the browser, but if you View Source, you'll see that the DOM will only the suspense boundaries' fallbacks
+- This is not "true" SSR and requires JS - the server does stream data to the browser, but if you View Source, you'll see that the DOM will only contain the suspense boundaries' fallbacks and not the DOM
