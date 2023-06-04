@@ -16,6 +16,5 @@ Demo: https://use-client-stream-hydration.vercel.app/
 
 ## Prior art
 
-- Apollo RFC: "The Next.js "App Router", React Server Component & "SSR with Suspense" story
-  " for Apollo - https://github.com/apollographql/apollo-client-nextjs/blob/pr/RFC-2/RFC.md
-- urql PR: "support Next 13 and React Server Components" - https://github.com/urql-graphql/urql/pull/3214
+- Apollo RFC: _"The Next.js "App Router", React Server Component & "SSR with Suspense"_ - https://github.com/apollographql/apollo-client-nextjs/blob/pr/RFC-2/RFC.md
+- urql PR: _"support Next 13 and React Server Components"_ - https://github.com/urql-graphql/urql/pull/3214
