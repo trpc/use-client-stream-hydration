@@ -13,3 +13,9 @@ Demo: https://use-client-stream-hydration.vercel.app/
 
 - If the browser tree re-renders while the data is fetching, we'll initialize the request in the browser
 - This is not "true" SSR and requires JS - the server does stream data to the browser, but if you View Source, you'll see that the DOM will only contain the suspense boundaries' fallbacks and not the DOM
+
+## Prior art
+
+- Apollo RFC: "The Next.js "App Router", React Server Component & "SSR with Suspense" story
+  " for Apollo - https://github.com/apollographql/apollo-client-nextjs/blob/pr/RFC-2/RFC.md
+- urql PR: "support Next 13 and React Server Components" - https://github.com/urql-graphql/urql/pull/3214
